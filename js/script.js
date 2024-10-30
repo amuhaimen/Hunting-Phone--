@@ -1,12 +1,12 @@
-const loadPhones = async (searchText) => {
+const loadPhones = async (searchText, isShowAll) => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phones?search=${searchText}`
   );
   const data = await res.json();
   const phones = data.data;
-  displayPhones(phones);
+  displayPhones(phones, isShowAll);
 };
-const displayPhones = (phones) => {
+const displayPhones = (phones, isShowAll) => {
   const phoneContainer = document.getElementById("phone-container");
 
   // clear phone container cards before adding new cards
@@ -16,14 +16,18 @@ const displayPhones = (phones) => {
 
   //   display show all button if there are more than 12 phones
   const showAllContainer = document.getElementById("show-all-container");
-  if (phones.length > 12) {
+  if (phones.length > 12 && !isShowAll) {
     showAllContainer.classList.remove("hidden");
   } else {
     showAllContainer.classList.add("hidden");
   }
+  //   show only first 12 phones if not show all
 
-  //   show only first 12 phones
-  phones = phones.slice(0, 12);
+  console.log("show all clicked", isShowAll);
+
+  if (!isShowAll) {
+    phones = phones.slice(0, 12);
+  }
 
   phones.forEach((phone) => {
     const phoneCard = document.createElement("div");
@@ -50,11 +54,11 @@ const displayPhones = (phones) => {
 
 // loadPhones();
 
-const handleSearch = () => {
+const handleSearch = (isShowAll) => {
   toggleLoading(true);
   const searchField = document.getElementById("search-field");
   const searchText = searchField.value;
-  loadPhones(searchText);
+  loadPhones(searchText, isShowAll);
 };
 
 const toggleLoading = (isLoading) => {
@@ -67,4 +71,9 @@ const toggleLoading = (isLoading) => {
   }
 };
 
-loadPhones("iphone");
+// handle show all
+const handleShowAll = () => {
+  handleSearch(true);
+};
+
+// loadPhones("iphone", false);
