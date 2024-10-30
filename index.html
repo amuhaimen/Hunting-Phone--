@@ -16,7 +16,45 @@
     <header>
       <h1 class="text-5xl">Hunting Phone</h1>
     </header>
-    <main></main>
+    <main class="container mx-auto">
+      <!-- search here start -->
+      <section class="bg-slate-500 py-5 rounded-md m-6 text-center">
+        <input
+          id="search-field"
+          type="text"
+          placeholder="Search here"
+          class="input input-bordered w-full max-w-xs"
+        />
+        <button class="btn btn-primary" onclick="handleSearch()">Search</button>
+      </section>
+      <!-- search here end -->
+
+      <!-- search result section start -->
+      <section>
+        <!-- 1.spinner or loader start -->
+
+        <div class="text-center my-60 text-primary hidden" id="loading-spinner">
+          <span class="loading loading-spinner loading-lg"></span>
+        </div>
+
+        <!-- 1.spinner or loader end -->
+
+        <!-- 2.search result start  -->
+        <div
+          id="phone-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+        ></div>
+        <!-- 2.search result end -->
+
+        <!-- 3. showAll button start  -->
+        <div id="show-all-container" class="text-center hidden">
+          <button class="btn btn-primary">Show All</button>
+        </div>
+        <!-- 3. showAll button end  -->
+      </section>
+      <!-- search result section end -->
+    </main>
     <footer></footer>
+    <script src="js/script.js"></script>
   </body>
 </html>
